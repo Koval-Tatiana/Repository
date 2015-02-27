@@ -1,0 +1,96 @@
+﻿       @header-font: Georgia;
+       @mFont: Monotype Corsiva;
+
+       @head-size: 24pt;
+       @text-size: 10pt;
+
+       @borderstyle: outset;
+       @borderwidth: 5px;
+
+       @base-color: #f6f2c3;
+       @color1: #2037ed;
+       @color2: #ca1919;
+       @color3: #01bb8e; 
+            
+       @img-height: 150;
+       @img-width:200;
+
+       .borderstyle(@brd-width,@brd-style,@brd-color)
+       {
+           border: @brd-width @brd-style @brd-color;
+       }
+
+       .imgsize
+       {
+           width:@img-width;
+           height:@img-height;
+       }
+
+       .fontstyle(@fontsize, @fontfamily)
+       {
+           font-size: @fontsize; 
+           font-family: @fontfamily;
+       }
+
+        body
+        {
+            background-color: @base-color; 
+        }
+
+        h1
+        {
+            .fontstyle(@head-size, @header-font);
+            text-align: center;
+            
+        }
+
+        .firstBlock
+        {
+            .borderstyle(@borderwidth*2, groove, @color1);
+            .fontstyle(@text-size*1.5, @mFont);
+            p
+            {
+                border-style: double;
+            }    
+            img
+            {
+                .imgsize;
+            }    
+        }
+
+        .secondBlock
+        {
+            .borderstyle(@borderwidth*3, @borderstyle, @color2);
+            .fontstyle(@text-size, @mFont);
+            img
+            {
+                .imgsize;
+            }
+        }
+
+        .thirdBlock
+        {
+            .borderstyle(@borderwidth*5, @borderstyle, @color3);
+            .fontstyle(@text-size*2, @mFont);
+
+            div
+            {
+                .borderstyle(@borderwidth, dotted, @color3 - #555555);
+                font-family:'Times New Roman';
+                p
+                {
+                    background-color:@color3 + #555555;
+                    font-size:@text-size*2.5;
+                }
+            }
+        }
+
+        .fourthBlock
+        {
+            .firstBlock;
+            p
+            {
+                background-color: @color1 + #777777;
+            }
+
+        }
