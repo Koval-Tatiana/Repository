@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" ng-app="app">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+    <script type="text/javascript" src="jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="angular.min.js"></script>
+    <script type="text/javascript" src="controllers.js"></script>
+    <script type="text/javascript" src="bootstrap.js"></script>
+
+</head>
+<body>
+
+    <h1> Актуальные задачи</h1>
+
+    <div ng-controller="Contorller1">
+
+        <!-- -------------------------ФОРМА------------------------- -->
+        <form class="form-inline">
+            <input type="text" class="form-control" placeholder="Наименование" ng-model="newItem.name">
+            <input type="text" class="form-control" placeholder="Исполнитель" ng-model="newItem.performer">
+            <input list="myList" class="form-control" type="text" placeholder="Приоритет" ng-model="newItem.priority" />
+            <datalist id="myList">
+                <option value="Высокий">
+                <option value="Средний">
+                <option value="Низкий">
+            </datalist>
+
+            <div class="btn-group">
+                <button class="btn btn-success" ng-click="add()"><span class="glyphicon glyphicon-plus"></span> Добавить</button>
+                <button class="btn btn-primary" ng-click="archive()" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-book"></span>Поместить в архив отмеченные</button>
+                <button class="btn btn-danger" ng-click="delete()"><span class="glyphicon glyphicon-remove"></span> Удалить отмеченные</button>
+            </div>
+        
+        </form>
+        <input type="text" class="form-control" placeholder="Поиск" ng-model="search">
+
+        <!------------------------------АКТУАЛЬНЫЕ ЗАДАЧИ------------------------------------>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Выполнено</th>
+                    <th>Наименование</th>
+                    <th>Приоритет</th>
+                    <th>Исполнитель</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="i in items | filter:search">
+                    <td><input type="checkbox" ng-model="i.done"></td>
+                    <td>{{i.name}}</td>
+                    <td>{{i.priority}}</td>
+                    <td>{{i.performer}}</td>
+                    <td><button class="btn btn-primary btn-xs" ng-click="arch(i)"> Поместить в архив</button></td>
+                    <td><button class="btn btn-danger btn-xs" ng-click="del(i)">Удалить</button></td>
+                </tr>
+            </tbody>
+
+        </table>
+
+        <!------------------------------АРХИВ------------------------------------>
+
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Архив</h4>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Наименование</th>
+                                    <th>Приоритет</th>
+                                    <th>Исполнитель</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="i in archiveItems">
+                                    <td>{{i.name}}</td>
+                                    <td>{{i.priority}}</td>
+                                    <td>{{i.performer}}</td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div> <!-- /.modal-content -->
+            </div> <!-- /.modal-dialog -->
+        </div> <!-- /.modal -->
+
+
+    </div>
+</body>
+</html>
