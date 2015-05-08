@@ -1,0 +1,8 @@
+﻿@model lab9_ASP_MVC_Views.Models.MyData
+
+<ul class="list-group">
+    @foreach (string item in @Model.tNames)
+    {
+        <li class="list-group-item text-right"> @Html.ActionLink(item, "PrintTable", "Home", new { table = item },null)</li>
+    }
+</ul>
